@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import type { DataTablePageEvent } from "primereact/datatable";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import type { Artwork } from "./Types";
@@ -26,14 +25,10 @@ const ArtTable = () => {
   };
 
   useEffect(() => {
-    fetchData(page + 1); // API is 1-indexed
+    fetchData(page + 1); 
   }, [page]);
 
-  const onPageChange = (e: DataTablePageEvent) => {
-    setPage(e.page ?? 0);
-  };
-
-  // ✅ FIXED this type inline since DataTableSelectionChangeEvent doesn't exist
+  
   const onSelectionChange = (e: { value: Artwork[] }) => {
     const newSelection: Artwork[] = e.value;
     const updated: { [id: number]: Artwork } = { ...selectedRows };
